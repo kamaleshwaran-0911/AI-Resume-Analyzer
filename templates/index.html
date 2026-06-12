@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #0b1220;
+            color: white;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 50px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #60a5fa;
+            font-size: 18px;
+        }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            padding: 70px 50px;
+            align-items: center;
+        }
+
+        .hero-text {
+            max-width: 520px;
+        }
+
+        .hero-text h1 {
+            font-size: 40px;
+            line-height: 1.2;
+        }
+
+        .hero-text span {
+            color: #3b82f6;
+        }
+
+        .hero-text p {
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+
+        /* FORM CARD */
+        .card {
+            width: 380px;
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        input, textarea {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        input[type="file"] {
+            background: white;
+            color: black;
+            padding: 10px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background: #3b82f6;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        /* FEATURES */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 50px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.03);
+            padding: 18px;
+            border-radius: 12px;
+            width: 250px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .box h3 {
+            color: #60a5fa;
+        }
+
+        .box p {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">AI Resume Analyzer</div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+
+    <!-- LEFT TEXT -->
+    <div class="hero-text">
+        <h1>Analyze Your Resume with <span>AI Power</span></h1>
+        <p>
+            Get ATS score, skill gap analysis, and AI suggestions instantly.
+            Improve your resume and increase your job chances.
+        </p>
+    </div>
+
+    <!-- FORM -->
+    <div class="card">
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <label>Upload Resume</label>
+            <input type="file" name="resume" required>
+            <p id="file-name">No file selected</p>
+
+            <label>Target Job Role</label>
+
+<div style="display:flex; gap:10px; margin-top:12px;">
+
+    <select name="role" required
+        style="flex:1; padding:10px; border-radius:8px; border:none; outline:none;">
+        <option value="">Select Role</option>
+        <option>Python Developer</option>
+        <option>Java Developer</option>
+        <option>Frontend Developer</option>
+        <option>Backend Developer</option>
+        <option>Data Analyst</option>
+        <option>AI/ML Engineer</option>
+        <option>Cloud Engineer</option>
+    </select>
+
+    <input type="text"
+           name="company"
+           placeholder="Company (e.g. TCS)"
+           required>
+</div>
+
+<p style="font-size:12px;color:#94a3b8;margin-top:8px;">
+    Select a role and enter your target company.
+</p>
+
+            <button type="submit">Analyze Resume</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+
+    <div class="box">
+        <h3>📊 ATS Score</h3>
+        <p>Check how well your resume passes ATS systems.</p>
+    </div>
+
+    <div class="box">
+        <h3>🧠 AI Feedback</h3>
+        <p>Get smart suggestions to improve your resume.</p>
+    </div>
+
+    <div class="box">
+        <h3>⚡ Instant Result</h3>
+        <p>Get analysis in seconds with AI processing.</p>
+    </div>
+
+</div>
+
+<script>
+
+const fileInput = document.querySelector('input[type="file"]');
+
+fileInput.addEventListener('change', function() {
+
+    if(this.files.length > 0) {
+
+        document.getElementById('file-name').innerText =
+            "Selected File: " + this.files[0].name;
+
+    }
+
+});
+
+</script>
+</body>
+</html>

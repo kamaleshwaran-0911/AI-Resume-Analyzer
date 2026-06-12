@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+     
+    <div class="container">
+    
+    <h1>AI Resume Analyzer</h1>
+
+    <div style="background:#1e293b;padding:15px;border-radius:10px;margin-bottom:20px;">
+    <h3 style="margin:8px;color:#94a3b8;">🎯 Target Role: {{ role }}</h3>
+    <h3 style="margin:8px;color:#94a3b8;">🏢 Company: {{ company }}</h3>
+    </div>
+
+    <div class="dashboard">
+
+    <div class="card">
+        <h2>{{ ats_score }}</h2>
+        <p>ATS Score</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ found_skills|length }}</h2>
+        <p>Skills Found</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ matched_skills|length }}</h2>
+        <p>Matched</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ missing_skills|length }}</h2>
+        <p>Missing</p>
+    </div>
+
+</div>
+    <hr>
+
+    <h2>ATS Score: {{ ats_score }}/100</h2>
+    <h3>Resume Strength: {{ level }}</h3>
+        
+    <div class="progress-bar">
+
+    <div class="progress"
+         id="progress"
+         data-score="{{ ats_score }}">
+
+         0%
+
+    </div>
+
+    </div>
+
+    <h2>Match Score: {{ score }}%</h2>
+
+    <hr>
+
+    <h2>Skills Found</h2>
+    <div class="chip-container">
+         {% for skill in found_skills %}
+           <span class="chip gray">{{ skill }}</span>
+           {% endfor %}
+    </div>
+
+    <h2>Required Skills</h2>
+    <ul>
+        {% for skill in required_skills %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Matched Skills</h2>
+    <div class="chip-container">
+        {% for skill in matched_skills %}
+             <span class="chip green">{{ skill }}</span>
+            {% endfor %}
+    </div>
+
+    <h2>Missing Skills</h2>
+    <div class="chip-container">
+        {% for skill in missing_skills %}
+            <span class="chip red">{{ skill }}</span>
+            {% endfor %}
+    </div>
+
+    <h2>Suggestions</h2>
+    <ul>
+        {% for suggestion in suggestions %}
+        <li>{{ suggestion }}</li>
+        {% endfor %}
+    </ul>
+
+    </div>
+
+
+    <script>
+
+const progress = document.getElementById("progress");
+
+const score = parseInt(
+    progress.getAttribute("data-score")
+);
+
+let current = 0;
+
+const interval = setInterval(() => {
+
+    if(current >= score){
+
+        clearInterval(interval);
+
+    } else {
+
+        current++;
+
+        progress.style.width = current + "%";
+
+        progress.innerText = current + "%";
+    }
+
+}, 15);
+
+</script>
+</body>
+</html>
