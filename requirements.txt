@@ -1,2 +1,1 @@
-Flask
-PyPDF2
+pip freeze > requirements.txt
